@@ -1,0 +1,40 @@
+// CRUD
+// ========
+// CREATE
+// ========
+// book := book.Book{
+// 	Title:       "Go Programming",
+// 	Price:       500000,
+// 	Description: "Basic Go Programming Bagus Banget ",
+// 	Rating:      5,
+// }
+// err = db.Create(&book).Error
+// if err != nil {
+// 	fmt.Println(err)
+// }
+
+// READ
+// var book book.Book
+
+// err = db.Debug().Where("id = ?", 1).First(&book).Error
+// if err != nil {
+// 	fmt.Println(err)
+// }
+
+// ========
+// UPDATE
+// ========
+// book.Title = "Go Basic"
+
+// err = db.Save(&book).Error
+// if err != nil {
+// 	fmt.Println(err)
+// }
+
+// ========
+// DELETE
+// ========
+// err = db.Delete(&book).Error
+// if err != nil {
+// 	fmt.Println(err)
+// }
