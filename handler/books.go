@@ -14,7 +14,7 @@ type bookHandler struct {
 	bookService book.Service
 }
 
-func NewBookHandler(bookService book.Service) *bookHandler {
+func NewBookHander(bookService book.Service) *bookHandler {
 	return &bookHandler{bookService}
 }
 

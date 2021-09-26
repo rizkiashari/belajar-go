@@ -17,53 +17,46 @@ func NewService(repository Repository) *service {
 }
 
 func (s *service) FindAll() ([]Book, error) {
-
 	books, err := s.repository.FindAll()
-
 	return books, err
 }
 
 func (s *service) FindByID(ID int) (Book, error) {
 	book, err := s.repository.FindByID(ID)
-
 	return book, err
 }
 
-func (s *service) Create(bookInput BookInput) (Book, error) {
+func (s *service) Create(bookRequest BookInput) (Book, error) {
+	price, _ := bookRequest.Price.Int64()
+	rating, _ := bookRequest.Rating.Int64()
 
-	price, _ := bookInput.Price.Int64()
-	rating, _ := bookInput.Rating.Int64()
 	book := Book{
-		Title:       bookInput.Title,
+		Title:       bookRequest.Title,
 		Price:       int(price),
-		Description: bookInput.Description,
+		Description: bookRequest.Description,
 		Rating:      int(rating),
 	}
 
 	newBook, err := s.repository.Create(book)
-
 	return newBook, err
 }
 
 func (s *service) Update(ID int, bookInput BookInput) (Book, error) {
-
-	book, _ := s.repository.FindByID(ID)
+	book, err := s.FindByID(ID)
 
 	price, _ := bookInput.Price.Int64()
 	rating, _ := bookInput.Rating.Int64()
 
 	book.Title = bookInput.Title
-	book.Price = int(price)
 	book.Description = bookInput.Description
+	book.Price = int(price)
 	book.Rating = int(rating)
 
-	newBook, err := s.repository.Update(book)
-
-	return newBook, err
+	s.repository.Update(book)
+	return book, err
 }
 
-func (s *service) DeleteBook(ID int) (Book, error) {
-
+func (s *service) Delete(ID int) (Book, error) {
 	book, _ := s.repository.FindByID(ID)
 
 	newBook, err := s.repository.Delete(book)

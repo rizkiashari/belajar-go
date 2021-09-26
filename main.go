@@ -23,7 +23,7 @@ func main() {
 
 	bookRepository := book.NewRepository(db)
 	bookService := book.NewService(bookRepository)
-	bookHandler := handler.NewBookHandler(bookService)
+	bookHandler := handler.NewBookHander(bookService)
 
 	fmt.Println("Database connection succeed")
 
